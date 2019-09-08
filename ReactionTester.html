@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reaction Tester</title>
+    <link rel="stylesheet" type="text/css" href="ReactionTester.css">
+</head>
+<body>
+    <div id="header-container">
+        <div class="main-timer">
+            <h1 id="timer-header">Reaction Tester</h1>
+            <div id="timer-container">
+                <p id="timer-count">Start Timer</p>
+                <button id="timer-start">Start</button>
+                <button id="timer-end">End</button>
+            </div>
+        </div>
+    </div>
+    <div id="reaction-forms">
+        <div id="shapes"> 
+        </div>
+    </div>
+
+    <!-- Reaction Tester -->
+    <script>
+    
+    // Start Reaction Tester
+    start = new Date().getTime();
+    document.getElementById("timer-start").onclick = function() { 
+        document.getElementById("timer-start").style.display = "none"; //Hide Start Timer
+        document.getElementById("timer-count").innerHTML = "Timer: "  ;  //Replace Html of timer-count to Timer:+ Time
+        document.getElementById("timer-end").style.display = "inline"; //Shows End Timer 
+        
+        // Creates the Shape
+        function shape() {
+
+            //Gets the values for the shapes
+            var width = Math.floor(Math.random()  *175+160); //*175+160
+            var height = Math.floor(Math.random() *175+125); //*175+125
+            var yAxis = Math.floor(Math.random()  *542 + 1); //*75+1
+            var xAxis = Math.floor(Math.random()  *1565 + 1);   //*75+1
+            var radius = Math.floor(Math.random() *50);  //*50
+            
+            //Replaces the element with the shape
+            document.getElementById("shapes").style.display ="block";
+            document.getElementById("shapes").style.border = "solid";
+            document.getElementById("shapes").style.position = "relative"
+            document.getElementById("shapes").style.height = height + "px";
+            document.getElementById("shapes").style.width = width + "px";
+            document.getElementById("shapes").style.borderRadius = radius + "%";
+            document.getElementById("shapes").style.top = yAxis + "px";
+            document.getElementById("shapes").style.left = xAxis + "px";  
+            start = new Date().getTime();
+        }
+
+        //Draw the shapes
+        function makeShapeAppear() {  
+            setTimeout(shape, Math.random()* 2000);
+            
+        }
+    
+        //Create Color Scheme
+        function rainbowStop(h) {
+            let f= (n,k=(n+h*12)%12) => .5-.5*Math.max(Math.min(k-3,9-k,1),-1);  
+            let rgb2hex = (r,g,b) => "#"+[r,g,b].map(x=>Math.round(x*255).toString(16).padStart(2,0)).join('');
+            return ( rgb2hex(f(0), f(8), f(4)) );
+        } 
+        
+        //Color the shapes
+        function colors() {
+            randomColor = Math.random(10)
+            randomColor2 = Math.random(10)
+            document.getElementById("shapes").style.background = rainbowStop(randomColor, randomColor2);
+        }
+
+        colors();
+        makeShapeAppear();
+        
+        //If user clicks shape
+        document.getElementById("shapes").onclick = function() {
+            //Add timer thingy
+            var end = new Date().getTime();
+
+            var timeTaken = (end - start) / 1000;
+            console.log(timeTaken)
+            document.getElementById("timer-count").innerHTML = "Timer: " + timeTaken; ;
+            document.getElementById("shapes").style.display = "none";
+            colors();
+            makeShapeAppear();          
+        }
+        
+        // make timer based on when forms are clicked
+        document.getElementById("timer-end").onclick = function() {
+            document.getElementById("timer-start").style.display = "inline-block"; //Hide Start Timer
+            document.getElementById("timer-count").innerHTML = "Start Timer";  //Replace Html of timer-count to Timer:+ Time
+            document.getElementById("timer-end").style.display = "none"; //Shows End Timer
+        }
+    }
+
+    
+
+        // var miniSeconds = 0;
+        // var seconds = 0;
+        // var interval = null;
+        // document.getElementById("timer-end").onclick = function() {
+        //     clearInterval(interval);
+        // }
+        // interval = setInterval(() => {
+        //     miniSeconds += 0.1;
+        //     miniSeconds = Number(Math.round(miniSeconds + 'e'+2)+'e-'+2)
+        //     if (miniSeconds === 1) {
+        //         seconds += 1;
+        //         miniSeconds = 0;    
+        //     }  
+        //     total = (seconds*10 + miniSeconds*10)/10 // Int + Float for final Results 
+        //     console.log(total)
+        // }, 100); 
+    </script>
+    
+</body>
+</html>
+

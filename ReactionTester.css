@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+p, h1, h2 ,h3 {
+    color: rgb(10, 59, 68);
+}
+
+#header-container {
+    display:flex;
+    justify-content: center;
+    
+    height: 10vh;
+    background-color:rgb(63, 150, 179);
+    border-bottom: 10px solid rgb(60, 60, 141);
+
+}
+.main-timer {
+    color: white;
+    font-size: 120%;
+    align-self: center;
+    border-bottom: 2px solid lightgray;
+}
+
+#timer-container {
+    display:flex;
+    font-size: 125%;
+    align-self: center;
+    flex-direction: row;
+    padding: 5px 0 5px 0;
+    
+}
+#timer-header {
+    border-bottom: 1px solid;
+}
+
+#timer-count {
+    
+    border-right: 1px solid;
+    height: 85%;
+    padding-right: 15px;
+    width: auto;
+    text-align: center;
+}
+#timer-start {
+    
+    background-color:rgb(50, 139, 168);
+    
+    border-radius: 30%;
+    width: 100px;
+    height: 25px;
+    margin-left: 15px;
+    cursor:pointer;
+}
+
+#timer-end {
+    display: none;
+    background-color:rgb(50, 139, 168);
+    border-radius: 30%;
+    width: 100px;
+    height: 25px;
+    margin-left: 15px;
+    
+    cursor:pointer;
+    
+    
+}
+#shapes {
+    position:relative;
+    outline: none;
+    
+}
+
+#shapes:hover {
+    transform: translateY(2px);
+}
+
+#start:hover {
+    background-color:rgb(25, 159, 204);
+}
+
+#start:active{
+    
+    
+    box-shadow: 0 5px #666;
+    transform: translateY(2px);
+}
+
+#reaction-forms {
+    height: 86.9vh;
+    border: 10px solid rgb(60, 60, 141);
+}
+
