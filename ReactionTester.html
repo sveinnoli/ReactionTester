@@ -117,26 +117,24 @@
                         floatSeconds = 0;
                     }
                 }, 100); 
-            } 
+            } //End of timeSaver
             //Attempt to merge all functions below into Shape Function //
 
 
             
-        } //End of timer-start
-
-        
-        
-        //Draw the shapes Make it so spamming the end/start button dosen't leave behind a shape
-        function makeShapeAppear() {  
-            setTimeout(shape, Math.random()* 2000);
             
+
+        } //End of document.onclick of timer-start
+
+        //Draw the shapes
+        function makeShapeAppear() {  
+            setTimeout(shape, Math.random()* 2000); 
         }
  
         timeTakenTotal = Array();
         //If user clicks shape
         document.getElementById("shapes").onclick = function() {
 
-            //Add Live Timer and Avg Reaction time
             var end = new Date().getTime();      
             var timeTaken = (end - start) / 1000;
             timeTakenTotal = timeTakenTotal + timeTaken;
@@ -166,7 +164,7 @@
             document.getElementById("shapes").style.display = "none";
             
         }
-        
+        //Draws shape When timer-start is pressed
         makeShapeAppear();
     }
         // var miniSeconds = 0;
