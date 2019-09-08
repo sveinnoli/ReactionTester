@@ -74,24 +74,34 @@
             randomColor2 = Math.random(10)
             document.getElementById("shapes").style.background = rainbowStop(randomColor, randomColor2);
         }
-
+        
         colors();
         makeShapeAppear();
-        
+        timeTakenTotal = Array();
         //If user clicks shape
         document.getElementById("shapes").onclick = function() {
             //Add timer thingy
             var end = new Date().getTime();
-
+            
             var timeTaken = (end - start) / 1000;
-            console.log(timeTaken)
+            timeTakenTotal = timeTakenTotal + timeTaken;
+            console.log(timeTakenTotal)
+
+            //If below 1s make count green else red
+            if (timeTaken > 1) {
+                document.getElementById("timer-count").style.background ="red";
+            } else {
+                document.getElementById("timer-count").style.background ="green";
+            }
+            
+
             document.getElementById("timer-count").innerHTML = "Timer: " + timeTaken; ;
             document.getElementById("shapes").style.display = "none";
             colors();
             makeShapeAppear();          
         }
         
-        // make timer based on when forms are clicked
+        // If user ends Reaction Timer
         document.getElementById("timer-end").onclick = function() {
             document.getElementById("timer-start").style.display = "inline-block"; //Hide Start Timer
             document.getElementById("timer-count").innerHTML = "Start Timer";  //Replace Html of timer-count to Timer:+ Time
