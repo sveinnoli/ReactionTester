@@ -9,10 +9,6 @@
     
 </head>
 <body>
-
-
-
-
     <div id="header-container">
         <div class="main-timer">
             <h1 id="timer-header">Reaction Tester</h1>
@@ -27,12 +23,7 @@
         <div id="shapes"> 
         </div>
     </div>
-
-
-
-
-
-
+    
     <!-- Reaction Tester -->
     <script>
         
@@ -55,22 +46,39 @@
 
     // Start Reaction Tester
     start = new Date().getTime();
-
-    
-            
     document.getElementById("timer-start").onclick = function() { 
+        screenwidth = document.getElementById("reaction-forms").clientWidth
+        game = true
         document.getElementById("timer-start").style.display = "none"; //Hide Start Timer
         document.getElementById("timer-count").innerHTML = "Timer: "  ;  //Replace Html of timer-count to Timer:+ Time
         document.getElementById("timer-end").style.display = "inline"; //Shows End Timer
         // Creates the Shape
         function shape() {
+            screenwidth = document.getElementById("reaction-forms").clientWidth
+            screenheight = document.getElementById("reaction-forms").clientHeight
             //Gets the values for the shapes
-            var width = Math.floor(Math.random()  *175+160); 
-            var height = Math.floor(Math.random() *175+125); 
-            var yAxis = Math.floor(Math.random()  *542 + 1); //Up Down
-            var xAxis = Math.floor(Math.random()  *1565 + 1);  //Left-Right
+            randX = Math.random(0,1)
+            randY = Math.random(0,1)
+            var width = Math.floor(randX *175+screenwidth/8)
+            var height = Math.floor(randY *175+screenheight/9) 
+            var yAxis = Math.floor(randY *screenheight)
+            var xAxis = Math.floor(randX*screenwidth)
             var radius = Math.floor(Math.random() *50);  
             
+            if (yAxis + height > screenheight) {
+                yAxis = screenheight - height
+
+            } if(yAxis - height < 0) {
+                yAxis = 0
+            }
+
+            if (xAxis + width > screenwidth) {
+                xAxis = screenwidth-width
+
+            } if(xAxis - width < 0) {
+                xAxis = 0
+            }
+
             //Replaces the element with the shape
             document.getElementById("shapes").style.display ="block";
             document.getElementById("shapes").style.border = "solid";
@@ -91,14 +99,12 @@
             //Color the shapes with the Color Scheme
             function colors() {
                 randomColor = Math.random(10)
-                randomColor2 = Math.random(10)
-                document.getElementById("shapes").style.background = rainbowStop(randomColor, randomColor2);
+                document.getElementById("shapes").style.background = rainbowStop(randomColor);
             }
 
             //Apply Colors to Shapes
             colors();
                     
-
             //Sets time to be the same as to when the function is called to avoid timer starting early
             start = new Date().getTime();
 
@@ -119,26 +125,37 @@
                 }, 100); 
             } //End of timeSaver
             //Attempt to merge all functions below into Shape Function //
-
-
-            
-            
-
         } //End of document.onclick of timer-start
 
         //Draw the shapes
         function makeShapeAppear() {  
-            setTimeout(shape, Math.random()* 2000); 
+            if (game = true) {
+                setTimeout(shape, Math.random()* 2000); 
+            }
         }
- 
+
+        if (game == true) {
+            setInterval(() => {
+                lastScreenSize = screenwidth
+                if (document.getElementById("reaction-forms").clientWidth != screenwidth) {
+                    document.getElementById("shapes").style.display = "none";
+                    console.log(screenheight)
+                    document.getElementById("timer-count").innerHTML = "Reseted";
+                    makeShapeAppear()
+                } else {
+                    screenwidth = lastScreenSize
+                    console.log("nothing")
+                }
+            }, 1000);
+        }
+
         timeTakenTotal = Array();
         //If user clicks shape
         document.getElementById("shapes").onclick = function() {
-
             var end = new Date().getTime();      
             var timeTaken = (end - start) / 1000;
             timeTakenTotal = timeTakenTotal + timeTaken;
-            console.log(timeTakenTotal)
+            // console.log(timeTakenTotal)
             
             //If below 1s make count green else red
             if (timeTaken > 1) {
@@ -152,12 +169,12 @@
             document.getElementById("shapes").style.display = "none";
 
             // Recall Shapes
-            
             makeShapeAppear();  
             }  
             
         // If user ends Reaction Timer
         document.getElementById("timer-end").onclick = function() {
+            game = false
             document.getElementById("timer-start").style.display = "inline-block"; //Hide Start Timer
             document.getElementById("timer-count").innerHTML = "Start Timer";  //Replace Html of timer-count to Timer:+ Time
             document.getElementById("timer-end").style.display = "none"; //Shows End Timer
@@ -167,24 +184,7 @@
         //Draws shape When timer-start is pressed
         makeShapeAppear();
     }
-        // var miniSeconds = 0;
-        // var seconds = 0;
-        // var interval = null;
-        // document.getElementById("timer-end").onclick = function() {
-        //     clearInterval(interval);
-        // }
-        // interval = setInterval(() => {
-        //     miniSeconds += 0.1;
-        //     miniSeconds = Number(Math.round(miniSeconds + 'e'+2)+'e-'+2)
-        //     if (miniSeconds === 1) {
-        //         seconds += 1;
-        //         miniSeconds = 0;    
-        //     }  
-        //     total = (seconds*10 + miniSeconds*10)/10 // Int + Float for final Results 
-        //     console.log(total)
-        // }, 100); 
     </script>
-    
 </body>
 </html>
 
