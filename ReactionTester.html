@@ -26,25 +26,50 @@
     
     <!-- Reaction Tester -->
     <script>
-        
-    // var miniSeconds = 0;
-        // var seconds = 0;
-        // var interval = null;
-        // document.getElementById("timer-end").onclick = function() {
-        //     clearInterval(interval);
-        // }
-        // interval = setInterval(() => {
-        //     miniSeconds += 0.1;
-        //     miniSeconds = Number(Math.round(miniSeconds + 'e'+2)+'e-'+2)
-        //     if (miniSeconds === 1) {
-        //         seconds += 1;
-        //         miniSeconds = 0;    
-        //     }  
-        //     total = (seconds*10 + miniSeconds*10)/10 // Int + Float for final Results 
-        //     console.log(total)
-        // }, 100);
-
     // Start Reaction Tester
+    function createShape() {
+        screenwidth = document.getElementById("reaction-forms").clientWidth
+        screenheight = document.getElementById("reaction-forms").clientHeight
+        //Gets the values for the shapes
+        var width = Math.floor(Math.random(0,1) *175+screenwidth/8)
+        var height = Math.floor(Math.random(0,1) *175+screenheight/9) 
+        xAxisOffset = (screenwidth+width)/screenwidth-1
+        yAxisOffset = (screenheight+height)/screenheight-1
+        randX = Math.random(xAxisOffset,1-xAxisOffset)
+        randY = Math.random(yAxisOffset,1-yAxisOffset)
+        var yAxis = Math.floor(randY *screenheight)
+        var xAxis = Math.floor(randX*screenwidth)
+        var radius = Math.floor(Math.random() *50);
+        console.log("x:",xAxis,screenwidth)
+        console.log("y:",yAxis,screenheight)  
+        //Still overflows unsure why.
+        
+        // if (yAxis + height > screenheight) {
+        //     yAxis = screenheight - height
+
+        // } if(yAxis - height < 0) {
+        //     yAxis = 0
+        // }
+
+        // if (xAxis + width > screenwidth) {
+        //     xAxis = screenwidth-width
+
+        // } if(xAxis - width < 0) {
+        //     xAxis = 0
+        // }
+
+        //Replaces the element with the shape
+        document.getElementById("shapes").style.display ="block";
+        document.getElementById("shapes").style.border = "solid";
+        document.getElementById("shapes").style.position = "relative"
+        document.getElementById("shapes").style.height = height + "px";
+        document.getElementById("shapes").style.width = width + "px";
+        document.getElementById("shapes").style.borderRadius = radius + "%";
+        document.getElementById("shapes").style.top = yAxis + "px";
+        document.getElementById("shapes").style.left = xAxis + "px";  
+    }
+
+
     start = new Date().getTime();
     document.getElementById("timer-start").onclick = function() { 
         screenwidth = document.getElementById("reaction-forms").clientWidth
@@ -54,40 +79,41 @@
         document.getElementById("timer-end").style.display = "inline"; //Shows End Timer
         // Creates the Shape
         function shape() {
-            screenwidth = document.getElementById("reaction-forms").clientWidth
-            screenheight = document.getElementById("reaction-forms").clientHeight
-            //Gets the values for the shapes
-            randX = Math.random(0,1)
-            randY = Math.random(0,1)
-            var width = Math.floor(randX *175+screenwidth/8)
-            var height = Math.floor(randY *175+screenheight/9) 
-            var yAxis = Math.floor(randY *screenheight)
-            var xAxis = Math.floor(randX*screenwidth)
-            var radius = Math.floor(Math.random() *50);  
+            createShape()
+            // screenwidth = document.getElementById("reaction-forms").clientWidth
+            // screenheight = document.getElementById("reaction-forms").clientHeight
+            // //Gets the values for the shapes
+            // randX = Math.random(0,1)
+            // randY = Math.random(0,1)
+            // var width = Math.floor(randX *175+screenwidth/8)
+            // var height = Math.floor(randY *175+screenheight/9) 
+            // var yAxis = Math.floor(randY *screenheight)
+            // var xAxis = Math.floor(randX*screenwidth)
+            // var radius = Math.floor(Math.random() *50);  
             
-            if (yAxis + height > screenheight) {
-                yAxis = screenheight - height
+            // if (yAxis + height > screenheight) {
+            //     yAxis = screenheight - height
 
-            } if(yAxis - height < 0) {
-                yAxis = 0
-            }
+            // } if(yAxis - height < 0) {
+            //     yAxis = 0
+            // }
 
-            if (xAxis + width > screenwidth) {
-                xAxis = screenwidth-width
+            // if (xAxis + width > screenwidth) {
+            //     xAxis = screenwidth-width
 
-            } if(xAxis - width < 0) {
-                xAxis = 0
-            }
+            // } if(xAxis - width < 0) {
+            //     xAxis = 0
+            // }
 
-            //Replaces the element with the shape
-            document.getElementById("shapes").style.display ="block";
-            document.getElementById("shapes").style.border = "solid";
-            document.getElementById("shapes").style.position = "relative"
-            document.getElementById("shapes").style.height = height + "px";
-            document.getElementById("shapes").style.width = width + "px";
-            document.getElementById("shapes").style.borderRadius = radius + "%";
-            document.getElementById("shapes").style.top = yAxis + "px";
-            document.getElementById("shapes").style.left = xAxis + "px";  
+            // //Replaces the element with the shape
+            // document.getElementById("shapes").style.display ="block";
+            // document.getElementById("shapes").style.border = "solid";
+            // document.getElementById("shapes").style.position = "relative"
+            // document.getElementById("shapes").style.height = height + "px";
+            // document.getElementById("shapes").style.width = width + "px";
+            // document.getElementById("shapes").style.borderRadius = radius + "%";
+            // document.getElementById("shapes").style.top = yAxis + "px";
+            // document.getElementById("shapes").style.left = xAxis + "px";  
 
             //Create Color Scheme
             function rainbowStop(h) {
@@ -108,23 +134,6 @@
             //Sets time to be the same as to when the function is called to avoid timer starting early
             start = new Date().getTime();
 
-            //Live Timer
-            //Find a way to implement this feature so it works for both onclick (Shapes) and Reset timer and store it after each onclick
-            function timeSaver() {
-                seconds = 0;
-                floatSeconds = 0;
-                var interval = null
-                setInterval(() => {
-                    floatSeconds += 1/10;
-                    console.log(floatSeconds)
-                    document.getElementById("shapes").onclick = function() {
-                        clearInterval(interval);
-                        seconds = 0;
-                        floatSeconds = 0;
-                    }
-                }, 100); 
-            } //End of timeSaver
-            //Attempt to merge all functions below into Shape Function //
         } //End of document.onclick of timer-start
 
         //Draw the shapes
@@ -139,12 +148,10 @@
                 lastScreenSize = screenwidth
                 if (document.getElementById("reaction-forms").clientWidth != screenwidth) {
                     document.getElementById("shapes").style.display = "none";
-                    console.log(screenheight)
                     document.getElementById("timer-count").innerHTML = "Reseted";
                     makeShapeAppear()
                 } else {
                     screenwidth = lastScreenSize
-                    console.log("nothing")
                 }
             }, 1000);
         }

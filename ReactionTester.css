@@ -47,7 +47,6 @@ p, h1, h2 ,h3 {
     
     background-color:rgb(50, 139, 168);
     
-    border-radius: 30%;
     width: 100px;
     height: 25px;
     margin-left: 15px;
@@ -57,7 +56,6 @@ p, h1, h2 ,h3 {
 #timer-end {
     display: none;
     background-color:rgb(50, 139, 168);
-    border-radius: 30%;
     width: 100px;
     height: 25px;
     margin-left: 15px;
