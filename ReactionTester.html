@@ -28,11 +28,16 @@
     function setHeight() {
         windowHeight = window.innerHeight
         headerHeight = parseInt(window.getComputedStyle(document.querySelector('#header-container')).height.replace(/[^\d.-]/g, ''))
-        console.log(windowHeight,headerHeight)
         document.getElementById("reaction-forms").style.height = windowHeight-headerHeight-20.3 + "px"
     }
     setHeight()
     window.addEventListener("resize", setHeight)
+
+    // //event listener for keys
+    // document.addEventListener('keyup', (e) => {
+    //     if (e.code === "ArrowUp")        console.log("up")
+    //     else if (e.code === "ArrowDown") console.log("down")
+    // });
 </script>
 
 <script>
@@ -47,6 +52,7 @@
         var height = Math.floor(Math.random(0,1) *75+screenheight/7) 
 
         //Generate x,y axis for shape
+        //##NOTE can change px to % and add screenResize event listener to adjust width ratio for overflow 
         xOffset = (screenwidth-width)/screenwidth
         yOffset = (screenheight-height)/screenheight
         randX = Math.random() *xOffset
@@ -81,8 +87,9 @@
     }
 
     start = new Date().getTime();
+    //-----------------------Start Game---------------------------------
     document.getElementById("timer-start").onclick = function() { 
-        game = true
+        var game = true
         document.getElementById("timer-start").style.display = "none"; //Hide Start Timer
         document.getElementById("timer-count").innerHTML = "Timer: "  ;  //Replace Html of timer-count to Timer:+ Time
         document.getElementById("timer-end").style.display = "inline"; //Shows End Timer
@@ -97,8 +104,10 @@
 
         //Draw the shapes
         function makeShapeAppear() {  
-            if (game = true) {
+            if (game == true) {
                 setTimeout(shape, Math.random()* 1500+0.5); 
+            } else {
+                //Pass
             }
         }
 
@@ -120,32 +129,35 @@
         timeTakenTotal = Array();
         //If user clicks shape
         document.getElementById("shapes").onclick = function() {
-            var end = new Date().getTime();      
-            var timeTaken = (end - start) / 1000;
-            timeTakenTotal = timeTakenTotal + timeTaken;
-            
-            if (timeTaken > 1) {
-                document.getElementById("timer-count").style.background ="red";
-            } else {
-                document.getElementById("timer-count").style.background ="green";
+            if (game == true) {
+                var end = new Date().getTime();      
+                var timeTaken = (end - start) / 1000;
+                timeTakenTotal = timeTakenTotal + timeTaken;
+                
+                if (timeTaken > 1) {
+                    document.getElementById("timer-count").style.background ="red";
+                } else {
+                    document.getElementById("timer-count").style.background ="green";
+                }
+
+                //Places reaction time for the onclick shape and makes shape dissapear
+                document.getElementById("timer-count").innerHTML = "Timer: " + timeTaken; ;
+                document.getElementById("shapes").style.display = "none";
+
+                // Recall Shapes
+                makeShapeAppear();  
+                }  else {
+                    document.getElementById("shapes").style.display = "none";
+                }
             }
-
-            //Places reaction time for the onclick shape and makes shape dissapear
-            document.getElementById("timer-count").innerHTML = "Timer: " + timeTaken; ;
-            document.getElementById("shapes").style.display = "none";
-
-            // Recall Shapes
-            makeShapeAppear();  
-            }  
             
-
             document.getElementById("timer-end").onclick = function() {
                 game = false
                 document.getElementById("timer-start").style.display = "inline-block"; //Hide Start Timer
                 document.getElementById("timer-count").innerHTML = "Start Timer";  //Replace Html of timer-count to Timer:+ Time
                 document.getElementById("timer-end").style.display = "none"; //Shows End Timer
                 document.getElementById("shapes").style.display = "none";
-            
+                document.getElementById("timer-count").style.background = "";
         }
         //Draws shape When timer-start is pressed
         makeShapeAppear();
