@@ -24,9 +24,9 @@
         </div>
     </div>
     
-    <!-- Reaction Tester -->
     <script>
     // Start Reaction Tester
+<<<<<<< HEAD
     function createShape() {
         screenwidth = document.getElementById("reaction-forms").clientWidth
         screenheight = document.getElementById("reaction-forms").clientHeight
@@ -70,6 +70,8 @@
     }
 
 
+=======
+>>>>>>> 96d79f67eb4fab2fa678d460c6f3b0a0bd502451
     start = new Date().getTime();
     document.getElementById("timer-start").onclick = function() { 
         screenwidth = document.getElementById("reaction-forms").clientWidth
@@ -105,6 +107,7 @@
             //     xAxis = 0
             // }
 
+<<<<<<< HEAD
             // //Replaces the element with the shape
             // document.getElementById("shapes").style.display ="block";
             // document.getElementById("shapes").style.border = "solid";
@@ -115,6 +118,18 @@
             // document.getElementById("shapes").style.top = yAxis + "px";
             // document.getElementById("shapes").style.left = xAxis + "px";  
 
+=======
+            //Replaces the element with the shape
+            document.getElementById("shapes").style.display ="block";
+            document.getElementById("shapes").style.border = "solid";
+            document.getElementById("shapes").style.position = "relative"
+            document.getElementById("shapes").style.height = height + "px";
+            document.getElementById("shapes").style.width = width + "px";
+            document.getElementById("shapes").style.borderRadius = radius + "%";
+            document.getElementById("shapes").style.top = yAxis + "px";
+            document.getElementById("shapes").style.left = xAxis + "px";  
+        
+>>>>>>> 96d79f67eb4fab2fa678d460c6f3b0a0bd502451
             //Create Color Scheme
             function rainbowStop(h) {
                 let f= (n,k=(n+h*12)%12) => .5-.5*Math.max(Math.min(k-3,9-k,1),-1);  
@@ -133,9 +148,13 @@
                     
             //Sets time to be the same as to when the function is called to avoid timer starting early
             start = new Date().getTime();
+<<<<<<< HEAD
 
         } //End of document.onclick of timer-start
 
+=======
+        }
+>>>>>>> 96d79f67eb4fab2fa678d460c6f3b0a0bd502451
         //Draw the shapes
         function makeShapeAppear() {  
             if (game = true) {
@@ -162,9 +181,7 @@
             var end = new Date().getTime();      
             var timeTaken = (end - start) / 1000;
             timeTakenTotal = timeTakenTotal + timeTaken;
-            // console.log(timeTakenTotal)
             
-            //If below 1s make count green else red
             if (timeTaken > 1) {
                 document.getElementById("timer-count").style.background ="red";
             } else {
@@ -179,13 +196,13 @@
             makeShapeAppear();  
             }  
             
-        // If user ends Reaction Timer
-        document.getElementById("timer-end").onclick = function() {
-            game = false
-            document.getElementById("timer-start").style.display = "inline-block"; //Hide Start Timer
-            document.getElementById("timer-count").innerHTML = "Start Timer";  //Replace Html of timer-count to Timer:+ Time
-            document.getElementById("timer-end").style.display = "none"; //Shows End Timer
-            document.getElementById("shapes").style.display = "none";
+
+            document.getElementById("timer-end").onclick = function() {
+                game = false
+                document.getElementById("timer-start").style.display = "inline-block"; //Hide Start Timer
+                document.getElementById("timer-count").innerHTML = "Start Timer";  //Replace Html of timer-count to Timer:+ Time
+                document.getElementById("timer-end").style.display = "none"; //Shows End Timer
+                document.getElementById("shapes").style.display = "none";
             
         }
         //Draws shape When timer-start is pressed
