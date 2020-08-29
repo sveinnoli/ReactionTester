@@ -4,65 +4,61 @@
 }
 
 p, h1, h2 ,h3 {
-    color: rgb(10, 59, 68);
+    color: deepskyblue;
 }
 
 #header-container {
     display:flex;
     justify-content: center;
-    
-    height: 10vh;
-    background-color:rgb(63, 150, 179);
-    border-bottom: 10px solid rgb(60, 60, 141);
+    background:linear-gradient(#32143d, #582c68);
 
 }
 .main-timer {
     color: white;
     font-size: 120%;
-    align-self: center;
     border-bottom: 2px solid lightgray;
 }
 
 #timer-container {
     display:flex;
     font-size: 125%;
-    align-self: center;
+    justify-content:center;
     flex-direction: row;
     padding: 5px 0 5px 0;
-    
 }
+
 #timer-header {
-    border-bottom: 1px solid;
+    border-bottom: 2px solid lightgray;
 }
 
 #timer-count {
-    
-    border-right: 1px solid;
+    border-right: 1px solid lightgray;
     height: 85%;
+    width:100%;
     padding-right: 15px;
-    width: auto;
     text-align: center;
 }
+
 #timer-start {
-    background-color:rgb(50, 139, 168);
-<<<<<<< HEAD
-    
-=======
->>>>>>> 96d79f67eb4fab2fa678d460c6f3b0a0bd502451
+    background-color:deepskyblue;
     width: 100px;
     height: 25px;
     margin-left: 15px;
     cursor:pointer;
+    border:none;
 }
 
 #timer-end {
     display: none;
-    background-color:rgb(50, 139, 168);
+    background-color:deepskyblue;
     width: 100px;
     height: 25px;
     margin-left: 15px;
     cursor:pointer;  
+    border:none;
+
 }
+
 #shapes {
     position:relative;
     outline: none;
@@ -78,15 +74,12 @@ p, h1, h2 ,h3 {
 }
 
 #start:active{
-    
-    
     box-shadow: 0 5px #666;
     transform: translateY(2px);
 }
 
 #reaction-forms {
     position: relative;
-    height: 86.9vh;
-    border: 10px solid rgb(60, 60, 141);
+    border: 10px solid #360c66;
 }
 
