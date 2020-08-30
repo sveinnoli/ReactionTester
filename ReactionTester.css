@@ -9,10 +9,21 @@ p, h1, h2 ,h3 {
 
 #header-container {
     display:flex;
+    position: relative;
     justify-content: center;
     background:linear-gradient(#32143d, #582c68);
-
 }
+
+#timer-avg {
+    position: absolute;
+    right: 80px;
+    top:45%;
+    color:white;
+    font-weight: bold;
+    font-size:20px;
+    color: deepskyblue;
+}
+
 .main-timer {
     color: white;
     font-size: 120%;
@@ -61,8 +72,13 @@ p, h1, h2 ,h3 {
 
 #shapes {
     position:relative;
-    outline: none;
     cursor: pointer;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    outline:none;
 }
 
 #shapes:hover {

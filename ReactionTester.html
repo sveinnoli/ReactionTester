@@ -10,6 +10,7 @@
 </head>
 <body>
     <div id="header-container">
+        <div id="timer-avg">Avg time: <span id="timer-avg-time"></span></div>
         <div class="main-timer">
             <h1 id="timer-header">Reaction Tester</h1>
             <div id="timer-container">
@@ -23,7 +24,7 @@
         <div id="shapes"> 
         </div>
     </div>
- 
+
 <script>
     function setHeight() {
         windowHeight = window.innerHeight
@@ -32,12 +33,6 @@
     }
     setHeight()
     window.addEventListener("resize", setHeight)
-
-    // //event listener for keys
-    // document.addEventListener('keyup', (e) => {
-    //     if (e.code === "ArrowUp")        console.log("up")
-    //     else if (e.code === "ArrowDown") console.log("down")
-    // });
 </script>
 
 <script>
@@ -59,7 +54,6 @@
         randY = Math.random() *yOffset
         xAxis = Math.round(randX*screenwidth)
         yAxis = Math.round(randY*screenheight)
-
         var radius = Math.floor(Math.random() *50);
         
         //Set style on shape
@@ -86,20 +80,26 @@
         document.getElementById("shapes").style.background = rainbowStop(randomColor);
     }
 
-    start = new Date().getTime();
+    // start = new Date().getTime();
     //-----------------------Start Game---------------------------------
     document.getElementById("timer-start").onclick = function() { 
         var game = true
+        reset = false
         document.getElementById("timer-start").style.display = "none"; //Hide Start Timer
         document.getElementById("timer-count").innerHTML = "Timer: "  ;  //Replace Html of timer-count to Timer:+ Time
         document.getElementById("timer-end").style.display = "inline"; //Shows End Timer
         // Creates the Shape
         function shape() {
-            createShape()
-            colorShape();
-            screenwidth = document.getElementById("reaction-forms").clientWidth
+            if (reset == false) {
+                createShape()
+                colorShape();
+                screenwidth = document.getElementById("reaction-forms").clientWidth
+
             //Sets time to be the same as to when the function is called to avoid timer starting early
-            start = new Date().getTime();
+                start = new Date().getTime();
+            } else if(reset == true) {
+                //Pass
+            }
         } //End of document.onclick of timer-start
 
         //Draw the shapes
@@ -126,20 +126,19 @@
             }, 1000);
         }
 
-        timeTakenTotal = Array();
+        timeTakenTotal = []
         //If user clicks shape
         document.getElementById("shapes").onclick = function() {
             if (game == true) {
                 var end = new Date().getTime();      
                 var timeTaken = (end - start) / 1000;
-                timeTakenTotal = timeTakenTotal + timeTaken;
-                
+                timeTakenTotal.push(timeTaken); //Adds time to array
+                document.getElementById("timer-avg-time").innerHTML = (timeTakenTotal.reduce((a,b) => a + b, 0)/timeTakenTotal.length).toFixed(3)
                 if (timeTaken > 1) {
                     document.getElementById("timer-count").style.background ="red";
                 } else {
                     document.getElementById("timer-count").style.background ="green";
                 }
-
                 //Places reaction time for the onclick shape and makes shape dissapear
                 document.getElementById("timer-count").innerHTML = "Timer: " + timeTaken; ;
                 document.getElementById("shapes").style.display = "none";
@@ -153,6 +152,7 @@
             
             document.getElementById("timer-end").onclick = function() {
                 game = false
+                reset = true
                 document.getElementById("timer-start").style.display = "inline-block"; //Hide Start Timer
                 document.getElementById("timer-count").innerHTML = "Start Timer";  //Replace Html of timer-count to Timer:+ Time
                 document.getElementById("timer-end").style.display = "none"; //Shows End Timer
